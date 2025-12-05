@@ -187,6 +187,29 @@ export async function searchQuest(questName) {
           description
           optional
           type
+          maps {
+            name
+          }
+          ... on TaskObjectiveItem {
+            item {
+              name
+              shortName
+              iconLink
+            }
+            items {
+              name
+              shortName
+              iconLink
+            }
+            count
+            foundInRaid
+          }
+          ... on TaskObjectiveMark {
+            markerItem {
+              name
+              iconLink
+            }
+          }
         }
         startRewards {
           traderStanding {

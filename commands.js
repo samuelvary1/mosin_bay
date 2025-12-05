@@ -185,6 +185,11 @@ export async function handleHelpCommand(message) {
         inline: false,
       },
       {
+        name: '!e-quest <quest name>',
+        value: 'Get an AI-enhanced quest guide with:\n• Step-by-step walkthrough\n• Location images and maps\n• Tips and strategies\n• Detailed objectives\n• Powered by Google Gemini',
+        inline: false,
+      },
+      {
         name: '!help',
         value: 'Show this help message',
         inline: false,
@@ -192,7 +197,7 @@ export async function handleHelpCommand(message) {
     )
     .addFields({
       name: '📝 Examples',
-      value: '`!item bitcoin`\n`!item graphics card`\n`!quest spa tour`\n`!quest punisher`',
+      value: '`!item bitcoin`\n`!item graphics card`\n`!quest spa tour`\n`!e-quest punisher`',
       inline: false,
     })
     .setFooter({ text: 'Data from api.tarkov.dev' })

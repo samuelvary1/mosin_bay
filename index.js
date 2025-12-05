@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
 import { handleItemCommand, handleQuestCommand, handleHelpCommand } from './commands.js';
+import { handleEnhancedQuestCommand } from './commands/enhancedQuest.js';
 
 // Load environment variables
 dotenv.config();
@@ -65,6 +66,11 @@ client.on('messageCreate', async (message) => {
       case 'quest':
       case 'q':
         await handleQuestCommand(message, args);
+        break;
+
+      case 'e-quest':
+      case 'eq':
+        await handleEnhancedQuestCommand(message, args);
         break;
 
       case 'liability':
