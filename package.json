@@ -1,0 +1,19 @@
+{
+  "name": "tarkov-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for Escape from Tarkov item information using api.tarkov.dev",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": ["discord", "tarkov", "bot"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2"
+  }
+}
