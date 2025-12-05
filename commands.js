@@ -28,8 +28,8 @@ export async function handleItemCommand(message, args) {
     // If multiple results, add a footer note
     if (items.length > 1) {
       const otherItems = items.slice(1, 4).map(i => i.shortName).join(', ');
-      embed.setFooter({ 
-        text: `${items.length - 1} other result(s): ${otherItems}` 
+      embed.setFooter({
+        text: `${items.length - 1} other result(s): ${otherItems}`
       });
     }
 
@@ -78,7 +78,7 @@ function createItemEmbed(item) {
     const bestSells = item.sellFor
       .sort((a, b) => b.priceRUB - a.priceRUB)
       .slice(0, 5);
-    
+
     const sellText = bestSells
       .map(sell => `**${sell.vendor.name}**: ${formatNumber(sell.price)} ${getCurrencySymbol(sell.currency)} (${formatNumber(sell.priceRUB)} ₽)`)
       .join('\n');
@@ -234,8 +234,8 @@ export async function handleQuestCommand(message, args) {
     // If multiple results, add a footer note
     if (quests.length > 1) {
       const otherQuests = quests.slice(1, 4).map(q => q.name).join(', ');
-      embed.setFooter({ 
-        text: `${quests.length - 1} other result(s): ${otherQuests}` 
+      embed.setFooter({
+        text: `${quests.length - 1} other result(s): ${otherQuests}`
       });
     }
 
@@ -251,7 +251,7 @@ export async function handleQuestCommand(message, args) {
  * @param {Object} quest - Quest data from Tarkov API
  * @returns {EmbedBuilder} Discord embed
  */
-function createQuestEmbed(quest) {
+export function createQuestEmbed(quest) {
   const embed = new EmbedBuilder()
     .setColor(0xFFAA00)
     .setTitle(`${quest.name}`)
@@ -274,7 +274,7 @@ function createQuestEmbed(quest) {
       .slice(0, 5)
       .map(req => `${req.task.name} (${req.status.join(', ')})`)
       .join('\n');
-    
+
     embed.addFields({
       name: '📋 Required Quests',
       value: reqText,
@@ -287,7 +287,7 @@ function createQuestEmbed(quest) {
     const traderReqText = quest.traderLevelRequirements
       .map(req => `${req.trader.name} Level ${req.level}`)
       .join(', ');
-    
+
     embed.addFields({
       name: '🤝 Trader Requirements',
       value: traderReqText,
@@ -304,7 +304,7 @@ function createQuestEmbed(quest) {
         return `${idx + 1}. ${obj.description}${optional}`;
       })
       .join('\n');
-    
+
     embed.addFields({
       name: `🎯 Objectives (${quest.objectives.length})`,
       value: objText.length > 1024 ? objText.substring(0, 1021) + '...' : objText,
@@ -315,7 +315,7 @@ function createQuestEmbed(quest) {
   // Rewards
   if (quest.finishRewards) {
     const rewards = [];
-    
+
     if (quest.finishRewards.items && quest.finishRewards.items.length > 0) {
       const items = quest.finishRewards.items
         .slice(0, 5)
