@@ -36,11 +36,19 @@ client.once('ready', () => {
 
 // Message handler
 client.on('messageCreate', async (message) => {
+  // Debug logging
+  console.log(`Message received: "${message.content}" from ${message.author.tag}`);
+  
   // Ignore bot messages
   if (message.author.bot) return;
 
   // Check if message starts with prefix
-  if (!message.content.startsWith(PREFIX)) return;
+  if (!message.content.startsWith(PREFIX)) {
+    console.log(`Message doesn't start with prefix ${PREFIX}`);
+    return;
+  }
+  
+  console.log(`Processing command: ${message.content}`);
 
   // Parse command and arguments
   const args = message.content.slice(PREFIX.length).trim().split(/ +/);

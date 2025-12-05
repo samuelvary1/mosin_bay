@@ -44,7 +44,7 @@ export async function searchItem(itemName) {
             name
           }
           minPlayerLevel
-          objectivesWithItem {
+          objectives {
             description
             optional
           }

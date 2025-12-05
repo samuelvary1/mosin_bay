@@ -95,18 +95,28 @@ function createItemEmbed(item) {
     const questText = item.usedInTasks
       .slice(0, 5)
       .map(task => {
-        const objectives = task.objectivesWithItem
+        const objectives = task.objectives
+          .filter(obj => obj.description && obj.description.toLowerCase().includes(item.name.toLowerCase()))
           .map(obj => obj.optional ? `~~${obj.description}~~` : obj.description)
           .join('\n  - ');
-        return `**${task.name}** (${task.trader.name}, Lvl ${task.minPlayerLevel})\n  - ${objectives}`;
+        return objectives ? `**${task.name}** (${task.trader.name}, Lvl ${task.minPlayerLevel})\n  - ${objectives}` : null;
       })
+      .filter(Boolean)
       .join('\n\n');
 
-    embed.addFields({
-      name: `📋 Needed for Quests (${item.usedInTasks.length})`,
-      value: questText.length > 1024 ? questText.substring(0, 1021) + '...' : questText,
-      inline: false,
-    });
+    if (questText) {
+      embed.addFields({
+        name: `📋 Needed for Quests (${item.usedInTasks.length})`,
+        value: questText.length > 1024 ? questText.substring(0, 1021) + '...' : questText,
+        inline: false,
+      });
+    } else {
+      embed.addFields({
+        name: '📋 Quest Status',
+        value: '✅ Not needed for any quests',
+        inline: false,
+      });
+    }
   } else {
     embed.addFields({
       name: '📋 Quest Status',
