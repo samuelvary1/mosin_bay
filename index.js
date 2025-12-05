@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
-import { handleItemCommand, handleHelpCommand } from './commands.js';
+import { handleItemCommand, handleQuestCommand, handleHelpCommand } from './commands.js';
 
 // Load environment variables
 dotenv.config();
@@ -60,6 +60,16 @@ client.on('messageCreate', async (message) => {
       case 'item':
       case 'i':
         await handleItemCommand(message, args);
+        break;
+
+      case 'quest':
+      case 'q':
+        await handleQuestCommand(message, args);
+        break;
+
+      case 'liability':
+      case 'whosucks':
+        await message.reply('The biggest liability on the Raiders Tarkov squad is <@eyyzeus> 💀');
         break;
 
       case 'help':
