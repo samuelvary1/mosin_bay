@@ -8,12 +8,17 @@ A Discord bot that provides Escape from Tarkov item information using the [api.t
 - 💰 View current flea market prices (24h average)
 - 💵 See best trader sell prices
 - 📋 Check if an item is needed for future quests
+- 🎯 Search for quest information and requirements
+- 🤖 **NEW:** AI-enhanced quest guides with step-by-step walkthroughs
+- 🗺️ **NEW:** Quest location images and maps
 - 🏷️ Display item categories and types
 - 🖼️ Show item icons and wiki links
 
 ## Commands
 
 - `!item <item name>` - Search for an item (alias: `!i`)
+- `!quest <quest name>` - Search for a quest (alias: `!q`)
+- `!e-quest <quest name>` - **NEW:** Get AI-enhanced quest guide with images (alias: `!eq`)
 - `!help` - Display help message (alias: `!h`)
 
 ### Examples
@@ -21,41 +26,47 @@ A Discord bot that provides Escape from Tarkov item information using the [api.t
 ```
 !item bitcoin
 !item graphics card
-!i m4a1
-!item gas analyzer
+!quest spa tour
+!e-quest punisher
+!eq gunsmith part 1
 ```
 
 ## Setup
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) version 18 or higher
+- [Node.js](https://nodejs.org/) version 23 or higher (see Development Setup below)
 - A Discord Bot Token from the [Discord Developer Portal](https://discord.com/developers/applications)
+- (Optional) A Google Gemini API key for enhanced quest features
 
 ### Installation
 
 1. **Clone or download this repository**
 
-2. **Install dependencies:**
-   ```powershell
+2. **Set up Node.js 23** (see Development Setup section below)
+
+3. **Install dependencies:**
+   ```bash
    npm install
    ```
 
-3. **Create a `.env` file** in the project root:
-   ```powershell
-   Copy-Item .env.example .env
+4. **Create a `.env` file** in the project root:
+   ```bash
+   cp .env.example .env
    ```
 
-4. **Configure your bot token:**
-   
-   Edit the `.env` file and replace `your_bot_token_here` with your actual Discord bot token:
-   ```
+5. **Configure your environment variables:**
+
+   Edit the `.env` file and add your tokens:
+   ```env
    DISCORD_TOKEN=your_actual_bot_token
    PREFIX=!
+   GEMINI_API_KEY=your_gemini_api_key  # Optional, for !e-quest command
    ```
 
-### Getting a Discord Bot Token
+### Getting API Keys
 
+**Discord Bot Token:**
 1. Go to the [Discord Developer Portal](https://discord.com/developers/applications)
 2. Click "New Application" and give it a name
 3. Go to the "Bot" section in the left sidebar
@@ -63,6 +74,13 @@ A Discord bot that provides Escape from Tarkov item information using the [api.t
 5. Under the bot's username, click "Reset Token" to get your token
 6. **Important:** Enable the "Message Content Intent" under Privileged Gateway Intents
 7. Copy the token to your `.env` file
+
+**Google Gemini API Key (Optional, for AI-enhanced quests):**
+1. Go to [Google AI Studio](https://ai.google.dev/)
+2. Click "Get API key"
+3. Create a new API key or use an existing one
+4. Copy the key to your `.env` file as `GEMINI_API_KEY`
+5. Note: Free tier includes 15 requests/minute
 
 ### Inviting the Bot to Your Server
 
@@ -76,16 +94,40 @@ A Discord bot that provides Escape from Tarkov item information using the [api.t
 4. Copy the generated URL and open it in your browser
 5. Select the server you want to add the bot to
 
+## Development Setup
+
+This project requires Node.js 23. We use `.nvmrc` for version management.
+
+**Using NVM (Recommended):**
+```bash
+# Install/use the correct Node version
+nvm use
+
+# Or install it if you don't have it
+nvm install 23
+nvm use 23
+```
+
+**Verify Node version:**
+```bash
+node --version  # Should show v23.x.x
+```
+
 ## Running the Bot
 
 **Start the bot:**
-```powershell
+```bash
 npm start
 ```
 
-**For development with auto-restart (Node 18+):**
-```powershell
+**For development with auto-restart:**
+```bash
 npm run dev
+```
+
+**Test enhanced quest feature without Discord:**
+```bash
+node test-enhanced-quest.js "spa tour"
 ```
 
 When the bot starts successfully, you'll see:
@@ -138,7 +180,10 @@ When you search for an item, the bot will display:
 
 - [Discord.js](https://discord.js.org/) v14 - Discord bot framework
 - [api.tarkov.dev](https://api.tarkov.dev) - Tarkov data GraphQL API
-- [Node.js](https://nodejs.org/) - JavaScript runtime
+- [Google Gemini](https://ai.google.dev/) - AI-powered quest guides
+- [Node.js](https://nodejs.org/) 23 - JavaScript runtime
+- [Cheerio](https://cheerio.js.org/) - Web scraping for quest images
+- [node-cache](https://www.npmjs.com/package/node-cache) - In-memory caching
 - [dotenv](https://www.npmjs.com/package/dotenv) - Environment variable management
 
 ## License
