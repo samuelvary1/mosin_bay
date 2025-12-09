@@ -72,6 +72,10 @@ client.on('messageCreate', async (message) => {
         await message.reply('The biggest liability on the Raiders Tarkov squad is <@eyyzeus> 💀');
         break;
 
+      case 'dta':
+        await message.reply('<@talented_chip> https://www.youtube.com/watch?v=QZNv2IosNlI&pp=ygUOZHJvcCB0aGUgYWxidW0%3D');
+        break;
+
       case 'help':
       case 'h':
         await handleHelpCommand(message);
