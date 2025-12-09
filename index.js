@@ -73,7 +73,7 @@ client.on('messageCreate', async (message) => {
         break;
 
       case 'dta':
-        await message.reply('<@talented_chip> https://www.youtube.com/watch?v=QZNv2IosNlI&pp=ygUOZHJvcCB0aGUgYWxidW0%3D');
+        await message.reply('<@407599675454259207> https://www.youtube.com/watch?v=QZNv2IosNlI&pp=ygUOZHJvcCB0aGUgYWxidW0%3D');
         break;
 
       case 'help':
